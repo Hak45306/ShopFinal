@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.packt.webstore.domain.taikhoan;
+import com.packt.webstore.service.hoaDonChiTietService;
+import com.packt.webstore.service.hoaDonService;
 import com.packt.webstore.service.taiKhoanService;
 
 /**
@@ -23,6 +25,10 @@ import com.packt.webstore.service.taiKhoanService;
 public class TaiKhoanController {
 	@Autowired
 	taiKhoanService tKhoanService;
+	@Autowired
+	hoaDonService hDonService;
+	@Autowired
+	hoaDonChiTietService hdcTietService;
 
 	@RequestMapping("/login")
 	public ModelAndView viewLogin() {
@@ -60,6 +66,8 @@ public class TaiKhoanController {
 		} else {
 			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
 		}
+		model.addAttribute("listhd", hDonService.getListUser(tKhoanService.accountName(auth.getName()).getId()));
+		model.addAttribute("listhdct", hdcTietService.getList());
 		model.addAttribute("profile", tKhoanService.detail(tKhoanService.accountName(auth.getName()).getId()));
 		model.addAttribute("view", "taikhoan/profile.jsp");
 		return "/layout";

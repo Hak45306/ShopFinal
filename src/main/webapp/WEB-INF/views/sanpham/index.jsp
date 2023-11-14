@@ -29,7 +29,7 @@
 			});
 		}
 		showPage(1);
-		var totalRows = ${list.size()}; 
+		var totalRows = ${list.size()}; //
 		var btnPage = 3; // Số nút bấm hiển thị di chuyển trang
 		var iTotalPages = Math.ceil(totalRows / pageSize);
 

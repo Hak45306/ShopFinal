@@ -78,7 +78,7 @@ public class ShopController {
 		return "/layout";
 	}
 
-	@RequestMapping(value = "/hoadon/addlink", method = RequestMethod.GET)
+	@RequestMapping(value = "/hoadon/addlink", method = RequestMethod.POST)
 	public String addlink(Model model, @RequestParam("idpro") Integer idpro) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth.getName().equals("anonymousUser")) {
@@ -90,10 +90,40 @@ public class ShopController {
 		newHd.setIduser(tKhoanService.accountName(auth.getName()).getId());
 		newHd.setTrangthai(1);
 		hDonService.add(newHd);
-		sanpham sp = sService.detail(idpro);
+//		sanpham sp = sService.detail(idpro);
 		hoadon hd = hDonService.detailIduser(tKhoanService.accountName(auth.getName()).getId());
 		List<giohang> list = gHangService.getListUser(tKhoanService.accountName(auth.getName()).getId());
 		for (giohang gh : list) {
+			sanpham sp = sService.detail(gh.getIdpro());
+			hoadonchitiet hdct = new hoadonchitiet();
+			hdct.setIdhd(hd.getId());
+			hdct.setIdpro(gh.getIdpro());
+			hdct.setDongia(sp.getPrice() * gh.getSoluong());
+			hdct.setSoluong(gh.getSoluong());
+			hdcTietService.add(hdct);
+		}
+//		gHangService.(idpro);
+		model.addAttribute("giohang/index.jsp");
+		return "redirect:/shop/";
+	}
+
+	@RequestMapping(value = "/hoadon/add", method = RequestMethod.GET)
+	public String add(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth.getName().equals("anonymousUser")) {
+			model.addAttribute("username", "");
+		} else {
+			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
+		}
+		hoadon newHd = new hoadon();
+		newHd.setIduser(tKhoanService.accountName(auth.getName()).getId());
+		newHd.setTrangthai(1);
+		hDonService.add(newHd);
+//		sanpham sp = sService.detail(idpro);
+		hoadon hd = hDonService.detailIduser(tKhoanService.accountName(auth.getName()).getId());
+		List<giohang> list = gHangService.getListUser(tKhoanService.accountName(auth.getName()).getId());
+		for (giohang gh : list) {
+			sanpham sp = sService.detail(gh.getIdpro());
 			hoadonchitiet hdct = new hoadonchitiet();
 			hdct.setIdhd(hd.getId());
 			hdct.setIdpro(gh.getIdpro());
