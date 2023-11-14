@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
@@ -14,6 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 </head>
 <body>
+<c:set var="total" value="0" />
 	<!-- Heading -->
 	<div class="bg-primary">
 		<div class="container py-2">
@@ -108,8 +110,10 @@ svg {
 									<p class="mb-2">
 										Price:
 										<c:forEach items="${listsp}" var="sp">
-									${gh.idpro==sp.id?sp.price:""}</c:forEach>
-										₫
+									<c:if test="${gh.idpro==sp.id}">
+					                    <c:set var="total" value="${total + sp.price * gh.soluong}" />
+					                    ${sp.price} ₫
+					                </c:if></c:forEach>
 									</p>
 									<p class="mb-2">
 										Quantity:
@@ -131,6 +135,7 @@ svg {
 							<div class="d-flex justify-content-between">
 								<p class="mb-2">Total price:</p>
 								<p class="mb-2 fw-bold">
+								${total}
 									<%-- 										<c:forEach items="${listsp}" var="sp"> --%>
 									<%-- 									${gh.idpro==sp.id?sp.price*gh.soluong:""} --%>
 									<%-- 									</c:forEach> --%>

@@ -62,11 +62,12 @@ public class InMemoryHoaDonRepository implements hoaDonRepository {
 	@Override
 	public void add(hoadon hd) {
 		// TODO Auto-generated method stub
-		String SQL = "INSERT INTO hoadon(iduser,trangthai,ngaytao)values(:iduser,:trangthai,:ngaytao)";
+		String SQL = "INSERT INTO hoadon(iduser,trangthai,ngaytao, tongtien)values(:iduser,:trangthai,:ngaytao, :tongtien)";
 		Map<String, Object> map = new HashMap<>();
 		map.put("iduser", hd.getIduser());
 		map.put("trangthai", hd.getTrangthai());
 		map.put("ngaytao", LocalDate.now());
+		map.put("tongtien", hd.getTongTien());
 		jdbcTemplate.update(SQL, map);
 	}
 

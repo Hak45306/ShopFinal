@@ -17,13 +17,22 @@ public class hoadon {
 	private Date ngaythanhtoan;
 	private Date ngayship;
 	private Date ngaynhan;
+	private double tongTien;
+
+	public double getTongTien() {
+		return tongTien;
+	}
+
+	public void setTongTien(double tongTien) {
+		this.tongTien = tongTien;
+	}
 
 	public hoadon() {
 		super();
 	}
 
 	public hoadon(int id, int iduser, int trangthai, Date ngaytao, Date ngaysua, Date ngaythanhtoan, Date ngayship,
-			Date ngaynhan) {
+			Date ngaynhan, double tongTien) {
 		super();
 		this.id = id;
 		this.iduser = iduser;
@@ -33,6 +42,7 @@ public class hoadon {
 		this.ngaythanhtoan = ngaythanhtoan;
 		this.ngayship = ngayship;
 		this.ngaynhan = ngaynhan;
+		this.tongTien = tongTien;
 	}
 
 	/**

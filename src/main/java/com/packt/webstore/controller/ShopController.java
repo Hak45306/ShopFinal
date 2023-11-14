@@ -115,13 +115,19 @@ public class ShopController {
 		} else {
 			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
 		}
+		hoadon hd = hDonService.detailIduser(tKhoanService.accountName(auth.getName()).getId());
+		List<giohang> list = gHangService.getListUser(tKhoanService.accountName(auth.getName()).getId());
+		double total = 0;
+		for (giohang gh : list) {
+			sanpham sp = sService.detail(gh.getIdpro());
+			total += sp.getPrice() * gh.getSoluong();
+		}
 		hoadon newHd = new hoadon();
 		newHd.setIduser(tKhoanService.accountName(auth.getName()).getId());
 		newHd.setTrangthai(1);
+		newHd.setTongTien(total);
 		hDonService.add(newHd);
 //		sanpham sp = sService.detail(idpro);
-		hoadon hd = hDonService.detailIduser(tKhoanService.accountName(auth.getName()).getId());
-		List<giohang> list = gHangService.getListUser(tKhoanService.accountName(auth.getName()).getId());
 		for (giohang gh : list) {
 			sanpham sp = sService.detail(gh.getIdpro());
 			hoadonchitiet hdct = new hoadonchitiet();
