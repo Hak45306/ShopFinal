@@ -83,7 +83,7 @@ public class InMemoryTaiKhoanRepository implements taiKhoanRepository {
 	public void update(int id, taikhoan tk) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
-		String SQL = "UPDATE taikhoan SET user:user, pass:pass,email:email,address:address,tel:tel WHERE id=:id";
+		String SQL = "UPDATE taikhoan SET user:user,pass:pass,email:email,address:address,tel:tel WHERE id=:id";
 		map.put("user", tk.getUser());
 		map.put("pass", tk.getPass());
 		map.put("email", tk.getEmail());

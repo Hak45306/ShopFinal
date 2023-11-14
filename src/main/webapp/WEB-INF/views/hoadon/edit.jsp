@@ -32,7 +32,7 @@
 		<h1 style="text-align: center;">Update sản phẩm</h1>
 		<a class="btn" href="#">Back</a>
 		<div class="col-8 offset-2 bg-light">
-			<form method="post" action="<spring:url value="/admin/sanpham/update?id=${sanpham.id}" />">
+			<form method="post" action="<spring:url value="/admin/sanpham/update" />">
 				<div class="row mt-2">
 					<div class="col-6">
 						<label>Tên</label> <input type="text" name="name" class="form-control list-inline-item" value="${sanpham.name}"/>
@@ -46,7 +46,7 @@
 						<label>Số lượng</label> <input type="text" name="soluong" class="form-control" value="${sanpham.soluong}"/>
 					</div>
 					<div class="col-6">
-						<label>Hình ảnh</label> <input type="file" name="img" class="form-control" value="${sanpham.img}"/>
+						<label>Hình ảnh</label> <input type="file" name="img" class="form-control"value="${sanpham.img}"/>
 					</div>
 				</div>
 				<div class="row mt-2">

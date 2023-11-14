@@ -73,4 +73,10 @@ public class gioHangServiceImpl implements gioHangService {
 		repository.saveOrUpdate(gh);
 	}
 
+	@Override
+	public void updateSlHigh(int id) {
+		// TODO Auto-generated method stub
+		repository.updateSlHigh(id);
+	}
+
 }

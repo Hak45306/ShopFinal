@@ -42,16 +42,18 @@
 										<div class="me-lg-5">
 											<div class="d-flex">
 												<c:forEach items="${listsp}" var="sp">
-													<img src="<c:url value="/resources/images/${gh.idpro==sp.id?sp.img:null}"/>"
-														class="border rounded me-4" style="width: 100px; height: 100px;" />
+													<c:forEach items="${gh.idpro==sp.id?sp.img:null}" var="item">
+														<img src="<c:url value="/resources/images/${item}"/>" class="border rounded me-4"
+															style="width: 100px; height: 100px;" />
+													</c:forEach>
+													<%-- 													<c:url value="${gh.idpro==sp.id?sp.img:null}" /> --%>
 												</c:forEach>
 												<%-- 													<img src="<c:url value="/resources/images/${sp.img}"/>" --%>
 												<!-- 															class="border rounded me-3" style="width: 100px; height: 100px;" /> -->
 												<div class="">
-													<a href="#" class="nav-link">Tên: <c:forEach items="${listsp}" var="sp">${gh.idpro==sp.id?sp.name:""}</c:forEach></a>
-													<a href="#" class="nav-link">Số lượng: <input style="width: 100px;"
-														class="form-control me-4" VALUE="${gh.soluong}">
-													</a>
+													<a class="nav-link">Tên: <c:forEach items="${listsp}" var="sp">${gh.idpro==sp.id?sp.name:""}</c:forEach></a>
+													<a class="nav-link">Số lượng: <input style="width: 80px;" class="form-control me-4"
+														value="${gh.soluong}"></a>
 													<text class="h6">Giá tiền: <c:forEach items="${listsp}" var="sp">${gh.idpro==sp.id?sp.price:""}</c:forEach>₫</text>
 													<!-- 													<p class="text-muted">Yellow, Jeans</p> -->
 												</div>
@@ -120,11 +122,16 @@ svg {
 						<div class="card-body">
 							<c:forEach items="${listgh}" var="gh" varStatus="index">
 								<div class="d-flex justify-content-between">
-									<p class="mb-2">Total price:</p>
 									<p class="mb-2">
+										Price:
 										<c:forEach items="${listsp}" var="sp">
 									${gh.idpro==sp.id?sp.price:""}</c:forEach>
 										₫
+									</p>
+									<p class="mb-2">
+										Quantity:
+										<c:forEach items="${listsp}" var="sp">
+									${gh.idpro==sp.id?gh.soluong:""}</c:forEach>
 									</p>
 								</div>
 							</c:forEach>
@@ -142,16 +149,18 @@ svg {
 									<p class="mb-2">Total price:</p>
 									<p class="mb-2 fw-bold">
 										<c:forEach items="${listsp}" var="sp">
-									${gh.idpro==sp.id?sp.price:""}</c:forEach>
+									${gh.idpro==sp.id?sp.price*gh.soluong:""}
+									</c:forEach>
 										₫
 									</p>
 								</div>
-							</c:forEach>
+							
 							<div class="mt-3">
-								<a href="<c:url value="/shop/"/>" class="btn btn-success w-100 shadow-0 mb-2"> Make
+								<a href="<c:url value="/shop/hoadon/addlink?idpro=${gh.idpro}"/>" class="btn btn-success w-100 shadow-0 mb-2"> Make
 									Purchase </a> <a href="<c:url value="/shop/"/>" class="btn btn-light w-100 border mt-2">
 									Back to shop </a>
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

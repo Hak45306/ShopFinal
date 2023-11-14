@@ -26,5 +26,7 @@ public interface gioHangService {
 
 	void update(int id, giohang gh);
 
+	void updateSlHigh(int id);
+
 	void saveOrUpdate(giohang gh);
 }

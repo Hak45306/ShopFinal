@@ -66,22 +66,22 @@ public class TaiKhoanController {
 	}
 
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
-	public String profile(@RequestParam("email") String email, @RequestParam("username") String username,
-			@RequestParam("password") String password, @RequestParam("phonenumber") String phonenumber,
-			@RequestParam("address") String address, Model model) {
+	public String profile(@RequestParam("id") Integer id, @RequestParam("email") String email,
+			@RequestParam("username") String username, @RequestParam("password") String password,
+			@RequestParam("phonenumber") String phonenumber, @RequestParam("address") String address, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth.getName().equals("anonymousUser")) {
 			model.addAttribute("username", "");
 		} else {
 			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
 		}
-		taikhoan tk = tKhoanService.detail(tKhoanService.accountName(auth.getName()).getId());
+		taikhoan tk = tKhoanService.detail(id);
 		tk.setEmail(email);
 		tk.setUser(username);
 		tk.setPass(password);
 		tk.setTel(phonenumber);
 		tk.setAddress(address);
-		tKhoanService.update(tKhoanService.accountName(auth.getName()).getId(), tk);
+		tKhoanService.update(id, tk);
 		model.addAttribute("view", "taikhoan/profile.jsp");
 		return "/layout";
 	}

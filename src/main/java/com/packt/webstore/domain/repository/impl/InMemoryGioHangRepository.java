@@ -102,15 +102,6 @@ public class InMemoryGioHangRepository implements gioHangRepository {
 	}
 
 	@Override
-	public giohang detailIdSP(int idsp) {
-		// TODO Auto-generated method stub
-		String SQL = "SELECT * FROM giohang where idpro=:id";
-		Map<String, Object> map = new HashMap<>();
-		map.put("id", idsp);
-		return jdbcTemplate.queryForObject(SQL, map, new giohangMapper());
-	}
-
-	@Override
 	public void saveOrUpdate(giohang gh) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
@@ -129,5 +120,23 @@ public class InMemoryGioHangRepository implements gioHangRepository {
 			map.put("soluong", gh.getSoluong());
 			jdbcTemplate.update(sql, map);
 		}
+	}
+
+	@Override
+	public void updateSlHigh(int id) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		String sql = "UPDATE giohang SET soluong=soluong+1 where :id";
+		map.put("id", id);
+		jdbcTemplate.update(sql, map);
+	}
+
+	@Override
+	public giohang detailIdSP(int idsp) {
+		// TODO Auto-generated method stub
+		String SQL = "SELECT * FROM giohang where idpro=:idpro";
+		Map<String, Object> map = new HashMap<>();
+		map.put("idpro", idsp);
+		return jdbcTemplate.queryForObject(SQL, map, new giohangMapper());
 	}
 }

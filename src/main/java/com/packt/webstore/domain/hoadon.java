@@ -10,29 +10,29 @@ import java.sql.Date;
  */
 public class hoadon {
 	private int id;
-	private int idpro;
 	private int iduser;
-	private Double dongia;
-	private int soluong;
-	private int tinhtrang;
+	private int trangthai;
 	private Date ngaytao;
+	private Date ngaysua;
 	private Date ngaythanhtoan;
+	private Date ngayship;
+	private Date ngaynhan;
 
 	public hoadon() {
 		super();
 	}
 
-	public hoadon(int id, int idpro, int iduser, Double dongia, int soluong, int tinhtrang, Date ngaytao,
-			Date ngaythanhtoan) {
+	public hoadon(int id, int iduser, int trangthai, Date ngaytao, Date ngaysua, Date ngaythanhtoan, Date ngayship,
+			Date ngaynhan) {
 		super();
 		this.id = id;
-		this.idpro = idpro;
 		this.iduser = iduser;
-		this.dongia = dongia;
-		this.soluong = soluong;
-		this.tinhtrang = tinhtrang;
+		this.trangthai = trangthai;
 		this.ngaytao = ngaytao;
+		this.ngaysua = ngaysua;
 		this.ngaythanhtoan = ngaythanhtoan;
+		this.ngayship = ngayship;
+		this.ngaynhan = ngaynhan;
 	}
 
 	/**
@@ -50,20 +50,6 @@ public class hoadon {
 	}
 
 	/**
-	 * @return the idpro
-	 */
-	public int getIdpro() {
-		return idpro;
-	}
-
-	/**
-	 * @param idpro the idpro to set
-	 */
-	public void setIdpro(int idpro) {
-		this.idpro = idpro;
-	}
-
-	/**
 	 * @return the iduser
 	 */
 	public int getIduser() {
@@ -78,45 +64,17 @@ public class hoadon {
 	}
 
 	/**
-	 * @return the dongia
+	 * @return the trangthai
 	 */
-	public Double getDongia() {
-		return dongia;
+	public int getTrangthai() {
+		return trangthai;
 	}
 
 	/**
-	 * @param dongia the dongia to set
+	 * @param trangthai the trangthai to set
 	 */
-	public void setDongia(Double dongia) {
-		this.dongia = dongia;
-	}
-
-	/**
-	 * @return the soluong
-	 */
-	public int getSoluong() {
-		return soluong;
-	}
-
-	/**
-	 * @param soluong the soluong to set
-	 */
-	public void setSoluong(int soluong) {
-		this.soluong = soluong;
-	}
-
-	/**
-	 * @return the tinhtrang
-	 */
-	public int getTinhtrang() {
-		return tinhtrang;
-	}
-
-	/**
-	 * @param tinhtrang the tinhtrang to set
-	 */
-	public void setTinhtrang(int tinhtrang) {
-		this.tinhtrang = tinhtrang;
+	public void setTrangthai(int trangthai) {
+		this.trangthai = trangthai;
 	}
 
 	/**
@@ -134,6 +92,20 @@ public class hoadon {
 	}
 
 	/**
+	 * @return the ngaysua
+	 */
+	public Date getNgaysua() {
+		return ngaysua;
+	}
+
+	/**
+	 * @param ngaysua the ngaysua to set
+	 */
+	public void setNgaysua(Date ngaysua) {
+		this.ngaysua = ngaysua;
+	}
+
+	/**
 	 * @return the ngaythanhtoan
 	 */
 	public Date getNgaythanhtoan() {
@@ -145,6 +117,34 @@ public class hoadon {
 	 */
 	public void setNgaythanhtoan(Date ngaythanhtoan) {
 		this.ngaythanhtoan = ngaythanhtoan;
+	}
+
+	/**
+	 * @return the ngayship
+	 */
+	public Date getNgayship() {
+		return ngayship;
+	}
+
+	/**
+	 * @param ngayship the ngayship to set
+	 */
+	public void setNgayship(Date ngayship) {
+		this.ngayship = ngayship;
+	}
+
+	/**
+	 * @return the ngaynhan
+	 */
+	public Date getNgaynhan() {
+		return ngaynhan;
+	}
+
+	/**
+	 * @param ngaynhan the ngaynhan to set
+	 */
+	public void setNgaynhan(Date ngaynhan) {
+		this.ngaynhan = ngaynhan;
 	}
 
 }

@@ -24,7 +24,7 @@ public class DanhMucController {
 	@Autowired
 	danhMucService service;
 
-	@RequestMapping("/")
+	@RequestMapping("")
 	public String index(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth.getName().equals("anonymousUser")) {

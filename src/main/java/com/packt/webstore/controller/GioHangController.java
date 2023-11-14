@@ -3,6 +3,8 @@
  */
 package com.packt.webstore.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,7 +32,7 @@ public class GioHangController {
 	@Autowired
 	taiKhoanService tKhoanService;
 
-	@RequestMapping("/")
+	@RequestMapping("")
 	public String index(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth.getName().equals("anonymousUser")) {
@@ -38,6 +40,7 @@ public class GioHangController {
 		} else {
 			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
 		}
+
 		model.addAttribute("listsp", sService.getList());
 		model.addAttribute("listgh", gHangService.getListUser(tKhoanService.accountName(auth.getName()).getId()));
 		model.addAttribute("view", "giohang/index.jsp");
@@ -69,11 +72,20 @@ public class GioHangController {
 		} else {
 			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
 		}
-		giohang gh = new giohang();
-		gh.setIdpro(idpro);
-		gh.setIduser(tKhoanService.accountName(auth.getName()).getId());
-		gh.setSoluong(1);
-		gHangService.add(gh);
+//		giohang detailidpro = gHangService.detailIdSP(idpro);
+		List<giohang> list = gHangService.getListUser(tKhoanService.accountName(auth.getName()).getId());
+		for (giohang gh : list) {
+			if (gh.getIdpro() == idpro) {
+				gHangService.updateSlHigh(gh.getId());
+				sService.updateSlLow(idpro);
+				return "redirect:/shop/";
+			}
+		}
+		giohang newGh = new giohang();
+		newGh.setIdpro(idpro);
+		newGh.setIduser(tKhoanService.accountName(auth.getName()).getId());
+		newGh.setSoluong(1);
+		gHangService.add(newGh);
 		sService.updateSlLow(idpro);
 		model.addAttribute("giohang/index.jsp");
 		return "redirect:/shop/";

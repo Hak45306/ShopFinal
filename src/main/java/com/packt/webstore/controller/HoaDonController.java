@@ -13,19 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.packt.webstore.domain.sanpham;
-import com.packt.webstore.service.danhMucService;
+import com.packt.webstore.service.hoaDonService;
 import com.packt.webstore.service.sanPhamService;
 
 /**
  * 
  */
 @Controller
-@RequestMapping("/admin/sanpham")
-public class SanPhamController {
+@RequestMapping("/admin/hoadon")
+public class HoaDonController {
+
 	@Autowired
 	sanPhamService sPhamService;
 	@Autowired
-	danhMucService dMucService;
+	hoaDonService hDonService;
 
 	@RequestMapping("")
 	public String index(Model model) {
@@ -36,8 +37,8 @@ public class SanPhamController {
 			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
 		}
 		model.addAttribute("list", sPhamService.getList());
-		model.addAttribute("danhmuc", dMucService.getList());
-		model.addAttribute("view", "sanpham/index.jsp");
+		model.addAttribute("hoadon", hDonService.getList());
+		model.addAttribute("view", "hoadon/index.jsp");
 		return "/layout";
 	}
 
@@ -59,7 +60,7 @@ public class SanPhamController {
 		sp.setMota(mota);
 		sp.setIddm(danhmuc);
 		sPhamService.add(sp);
-		return "redirect:/admin/sanpham/";
+		return "redirect:/admin/hoadon/";
 	}
 
 	@RequestMapping("/edit")
@@ -70,32 +71,31 @@ public class SanPhamController {
 		} else {
 			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
 		}
-		model.addAttribute("danhmuc", dMucService.getList());
-		model.addAttribute("sanpham", sPhamService.detail(id));
-		model.addAttribute("view", "sanpham/edit.jsp");
+		model.addAttribute("list", sPhamService.getList());
+		model.addAttribute("hoadon", hDonService.detail(id));
+		model.addAttribute("view", "hoadon/edit.jsp");
 		return "/layout";
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(@RequestParam("id") Integer id, @RequestParam("name") String name,
-			@RequestParam("price") Double price, @RequestParam("soluong") Integer soluong,
-			@RequestParam("img") String img, @RequestParam("mota") String mota,
-			@RequestParam("danhmuc") Integer danhmuc, Model model) {
+	public String update(@RequestParam("name") String name, @RequestParam("price") Double price,
+			@RequestParam("soluong") Integer soluong, @RequestParam("img") String img,
+			@RequestParam("mota") String mota, @RequestParam("danhmuc") Integer danhmuc, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth.getName().equals("anonymousUser")) {
 			model.addAttribute("username", "");
 		} else {
 			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
 		}
-		sanpham sp = sPhamService.detail(id);
+		sanpham sp = new sanpham();
 		sp.setName(name);
 		sp.setPrice(price);
 		sp.setSoluong(soluong);
 		sp.setImg(img);
 		sp.setMota(mota);
 		sp.setIddm(danhmuc);
-		sPhamService.update(id, sp);
-		return "redirect:/admin/sanpham/";
+		sPhamService.add(sp);
+		return "redirect:/admin/hoadon/";
 	}
 
 	@RequestMapping("/delete")
@@ -107,6 +107,6 @@ public class SanPhamController {
 			model.addAttribute("username", "" + " Hi," + "" + auth.getName());
 		}
 		sPhamService.delete(id);
-		return "redirect:/admin/sanpham/";
+		return "redirect:/admin/hoadon/";
 	}
 }

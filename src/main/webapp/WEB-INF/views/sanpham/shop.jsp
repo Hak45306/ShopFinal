@@ -18,6 +18,7 @@
 <script
 	src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js"
 	type="text/javascript"></script>
+</head>
 <script type="text/javascript">
 	$(function() {
 		var pageSize = 4;
@@ -30,19 +31,22 @@
 		}
 		showPage(1);
 		var totalRows = ${list.size()}; 
-		var btnPage = 5; // Số nút bấm hiển thị di chuyển trang
+		var btnPage = 3; // Số nút bấm hiển thị di chuyển trang
 		var iTotalPages = Math.ceil(totalRows / pageSize);
 
 		var obj = $('#pagination').twbsPagination({
 			totalPages : iTotalPages,
 			visiblePages : btnPage,
+			first : "‹‹",
+			prev : "‹",
+			next : "›",
+			last : "››",
 			onPageClick : function(event, page) {
 				showPage(page);
 			}
 		});
 	});
 </script>
-</head>
 <body>
 	<!-- Heading -->
 	<!-- 	<div class="bg-primary"> -->
